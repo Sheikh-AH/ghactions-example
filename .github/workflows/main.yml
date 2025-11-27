@@ -4,12 +4,17 @@ on:
       - main
   workflow_dispatch:
 jobs:
-  example:
-    name: "Example job"
+  quality_check:
+    name: "quality_check"
     runs-on: "ubuntu-latest"
     steps:
-     - name: "Step 1"
-       run: echo "hi"
-     - name: "Step 2"
-       run: echo "hi"
+    - name: "Get_repo"
+      uses: actions/checkout@v6
+    - name: "Install python"
+      uses: actions/setup-python@v6
+    - name: "Install libraries"
+      run: pip install -r requirements.txt
+    - name: "Run pytest"
+      run: pytest test_main.py
+
     
